@@ -1,0 +1,6 @@
+upstream
+.git
+website
+teacher
+admin
+**/__pycache__
