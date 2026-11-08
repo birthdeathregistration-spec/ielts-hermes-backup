@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS hermes_teacher_access (
+    user_id BIGINT UNSIGNED PRIMARY KEY,
+    enabled TINYINT(1) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
