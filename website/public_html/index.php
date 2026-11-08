@@ -48,7 +48,7 @@ require_once __DIR__ . '/../private/bootstrap.php';
         <button type="button" data-tab="writing" class="tab">Writing Room</button>
         <button type="button" data-tab="library" class="tab">My Library</button>
         <button type="button" data-tab="coach" class="tab">Academic Mentor</button>
-        <button type="button" data-tab="resources" class="tab">Official Resources</button>
+        <button type="button" data-tab="resources" class="tab">IELTS Resources</button>
         <button type="button" data-tab="videos" class="tab">YouTube Class</button>
         <button type="button" data-tab="speaking" class="tab">Speaking &amp; Voice</button>
         <button type="button" data-tab="mocks" class="tab">Mini Mock Tests</button>
@@ -125,6 +125,11 @@ require_once __DIR__ . '/../private/bootstrap.php';
       <section id="resourcesPanel" class="panel hidden">
         <div class="section-heading"><div><div class="eyebrow">OFFICIAL & INDEPENDENT VERIFIED LINKS</div><h2>IELTS learning resource directory</h2></div><span class="pill">Navigation · No scraping</span></div>
         <article class="card content-card"><p class="muted">এখানকার লিংকগুলো পাবলিক সাইটে নিয়ে যাবে। আমরা অন্য সাইটের সম্পূর্ণ লেখা বা Cambridge বই কপি করছি না। উৎসের নিয়ম মেনে নিজস্ব বা অনুমোদিত নোট Knowledge Library-তে যোগ করা যাবে।</p>
+          <h3>Band 9 লক্ষ্য ধরে প্রস্তুতি</h3>
+          <ol><li>প্রথমে চার দক্ষতায় একটি করে নমুনা কাজ করো। কোন প্রশ্নে কেন আটকালে লিখে রাখো।</li>
+          <li>প্রতিদিন একটি দুর্বলতা নিয়ে কাজ করো। Listening-এ আগে একবার শুনে উত্তর দাও, তারপর উত্তর ও ট্রান্সক্রিপ্ট মিলিয়ে কঠিন অংশটি আবার শোনো।</li>
+          <li>Writing-এর একটি খসড়া সংশোধন করো। Speaking-এর একই প্রশ্নের উত্তর আবার রেকর্ড করে উদাহরণ ও স্পষ্টতা তুলনা করো।</li>
+          <li>প্রতি সপ্তাহে নতুন প্রশ্নে সময় ধরে অনুশীলন করো। আগের ভুলগুলো কতবার ফিরেছে দেখে পরের সপ্তাহের লক্ষ্য ঠিক করো।</li></ol>
           <label>Filter by skill<select id="resourceSkill"><option value="all">All IELTS skills</option><option value="reading">Reading</option><option value="listening">Listening</option><option value="writing">Writing</option><option value="speaking">Speaking</option></select></label>
           <div id="resourceList" class="resource-grid"></div>
         </article>
