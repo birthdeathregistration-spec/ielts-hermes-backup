@@ -48,7 +48,7 @@ async function ask() {
   const append=(who,text)=>{const p=document.createElement('p');p.textContent=who+' · '+text;el('chat').appendChild(p);};
   append('তুমি',question);el('question').value='';status('উত্তর তৈরি হচ্ছে…');
   try {
-    const r=await fetch('api/hermes_tutor.php',{method:'POST',headers,body:JSON.stringify({question,language:el('language').value.slice(0,2),research:el('research').checked})});
+    const r=await fetch('api/hermes_tutor.php',{method:'POST',headers,body:JSON.stringify({question,language:el('language').value.slice(0,2),class_teacher:Number(el('classTeacher').value),research:el('research').checked})});
     const data=await r.json();if(!r.ok)throw Error(data.error||'উত্তর পাওয়া যায়নি');
     append('AI',data.answer);status('');
     if(live && id===generation){status('AI বলছে…');await speak(data.answer,id);}

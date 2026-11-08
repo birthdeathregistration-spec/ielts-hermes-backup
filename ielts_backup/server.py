@@ -5,6 +5,7 @@ import os
 
 from aiohttp import web
 from research import research
+from youtube_class import analyze
 
 KEY = os.environ["IELTS_BACKUP_KEY"]
 if len(KEY) < 32:
@@ -35,6 +36,21 @@ async def health(request):
     return web.json_response({"status": "ok"})
 
 
+async def analyze_class(request):
+    key = os.getenv("CLASS_IMPORT_KEY", "")
+    if len(key) < 32 or not hmac.compare_digest(request.headers.get("Authorization", "").encode(), ("Bearer " + key).encode()):
+        raise web.HTTPUnauthorized()
+    try:
+        data = await request.json()
+        if not isinstance(data, dict) or not isinstance(data.get("url"), str) or len(data["url"]) > 2048:
+            raise ValueError("Invalid video URL.")
+        return web.json_response(await analyze(data["url"]))
+    except ValueError as error:
+        raise web.HTTPBadRequest(text=str(error)) from None
+    except (RuntimeError, asyncio.TimeoutError, OSError) as error:
+        raise web.HTTPBadGateway(text="Video analysis unavailable.") from error
+
+
 async def reply(request):
     if not hmac.compare_digest(request.headers.get("Authorization", "").encode(), ("Bearer " + KEY).encode()):
         raise web.HTTPUnauthorized()
@@ -62,6 +78,6 @@ async def reply(request):
 
 
 app = web.Application(client_max_size=512 * 1024)
-app.add_routes([web.get("/health", health), web.post("/reply", reply)])
+app.add_routes([web.get("/health", health), web.post("/reply", reply), web.post("/teacher/class", analyze_class)])
 if __name__ == "__main__":
     web.run_app(app, port=int(os.getenv("PORT", "10000")), access_log=None)

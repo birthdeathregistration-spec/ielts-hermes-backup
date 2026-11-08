@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__.'/../private/bootstrap.php';
-require_user(); $cfg=settings();
+require_once __DIR__.'/../private/TeacherClasses.php';
+$user=require_user(); $cfg=settings();
 ?>
 <!doctype html><html lang="bn"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="csrf-token" content="<?=htmlspecialchars($_SESSION['csrf'],ENT_QUOTES)?>">
@@ -11,6 +12,9 @@ require_user(); $cfg=settings();
 <img src="teacher-avatar.jpg" width="96" alt="অনুমোদিত শিক্ষকের ছবি"><?php endif; ?>
 <p>এটি AI শিক্ষক। ভয়েস চালু করলে ব্রাউজারের speech service তোমার কথা প্রক্রিয়া করতে পারে।</p>
 <select id="language" aria-label="Language"><option value="bn-BD">বাংলা</option><option value="en-GB">English</option></select>
+<?php if (in_array($user,class_teacher_ids(),true)): ?><p><a href="teacher-classes.php">আমার YouTube ক্লাস যোগ করুন</a></p><?php endif; ?>
+<label>ক্লাস থেকে শিখুন <select id="classTeacher"><option value="0">সাধারণ টিউটর</option>
+<?php foreach (class_teacher_ids() as $id): ?><option value="<?=$id?>"><?=htmlspecialchars((string)($cfg['class_teacher_names'][$id]??"শিক্ষক $id"),ENT_QUOTES)?></option><?php endforeach; ?></select></label>
 <label><input type="checkbox" id="research"> ওয়েব গবেষণা (শুধু প্রশ্নটি সার্চে যাবে)</label>
 <label><input type="checkbox" id="teacher" <?=empty($cfg['teacher_voice_approved'])?'disabled':''?>> অনুমোদিত শিক্ষক-কণ্ঠ (উত্তরটি ভয়েস সেবায় যাবে)</label>
 <div id="chat" role="log"></div><p id="status" role="status"></p>
